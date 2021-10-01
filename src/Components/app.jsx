@@ -3,14 +3,20 @@ import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.css'; 
 import axios from 'axios'; 
 import DisplaySongs from "./displaySongs";
+import NavBar from "./navbar";
+import SearchBar from "./searchbar";
+
 
 
 class App extends React.Component{
-    constructor(){
-        super(); 
-        this.state = {
+    constructor(props){
+        super(props); 
+        this.state = { 
             songs:[]
+            
+            
         }
+       
     }
 
 componentDidMount(){
@@ -18,10 +24,14 @@ componentDidMount(){
     .then(response => this.setState({songs: response.data}))
 }
 
+
+
     render(){
         return(
+            
             <div>
-                <DisplaySongs />
+                <SearchBar />
+                <DisplaySongs songs={this.state.songs} />
             </div>
             
             
