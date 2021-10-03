@@ -5,6 +5,8 @@ import axios from 'axios';
 import DisplaySongs from "./displaySongs";
 import NavBar from "./navbar";
 import SearchBar from "./searchbar";
+import ImprovisedSearchBar from "./improvisedSearchBar";
+import AlbumSearchBar from "./albumSearchBar";
 
 
 
@@ -12,7 +14,9 @@ class App extends React.Component{
     constructor(props){
         super(props); 
         this.state = { 
-            songs:[]
+            songs:[], 
+            filteredSongs:[], 
+            filteredAlbums:[]
             
             
         }
@@ -21,8 +25,27 @@ class App extends React.Component{
 
 componentDidMount(){
     axios.get('http://www.devcodecampmusiclibrary.com/api/music')
-    .then(response => this.setState({songs: response.data}))
+    .then(response => this.setState({
+        songs: response.data,
+        filteredSongs: response.data
+    }))
 }
+onTitleChange = (event) =>{ 
+    const filteredSongs= this.state.songs.filter((song) => song.title.includes(event.target.value));
+    this.setState({
+        filteredSongs: filteredSongs
+
+    })
+}
+
+onAlbumChange = (event) =>{
+    const filteredAlbums= this.state.songs.filter((song) => song.album.includes(event.target.value));
+    this.setState({
+        filteredSongs: filteredAlbums
+    })
+}
+
+
 
 
 
@@ -30,8 +53,11 @@ componentDidMount(){
         return(
             
             <div>
-                <SearchBar />
-                <DisplaySongs songs={this.state.songs} />
+                <SearchBar/> 
+                <ImprovisedSearchBar searchField="Title" onChange={this.onTitleChange} /> 
+                <AlbumSearchBar searchField="Album" onChange={this.onAlbumChange} />
+                <DisplaySongs songs={this.state.filteredSongs} albulms={this.state.filteredAlbums} />
+                
             </div>
             
             
