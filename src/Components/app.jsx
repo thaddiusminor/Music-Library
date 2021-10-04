@@ -7,6 +7,9 @@ import NavBar from "./navbar";
 import SearchBar from "./searchbar";
 import ImprovisedSearchBar from "./improvisedSearchBar";
 import AlbumSearchBar from "./albumSearchBar";
+import ArtistSearchBar from "./artistSearchBar";
+import GenreSearchBar from "./genreSearchBar";
+import ReleaseDate from "./releaseDate";
 
 
 
@@ -44,9 +47,26 @@ onAlbumChange = (event) =>{
         filteredSongs: filteredAlbums
     })
 }
+onArtistChange = (event) =>{
+    const filteredArtist= this.state.songs.filter((art) =>art.artist.includes(event.target.value));
+    this.setState({
+        filteredSongs: filteredArtist
+    })
+}
 
+onGenreChange = (event) =>{
+    const filteredGenre = this.state.songs.filter((genre) => genre.genre.includes(event.target.value));
+    this.setState({
+        filteredSongs: filteredGenre
+    })
+}
 
-
+onReleaseChange = (event) =>{
+    const filteredRelease = this.state.songs.filter((release) => release.releaseDate.includes(event.target.value));
+    this.setState({
+        filteredSongs: filteredRelease
+    })
+}
 
 
     render(){
@@ -56,7 +76,10 @@ onAlbumChange = (event) =>{
                 <SearchBar/> 
                 <ImprovisedSearchBar searchField="Title" onChange={this.onTitleChange} /> 
                 <AlbumSearchBar searchField="Album" onChange={this.onAlbumChange} />
-                <DisplaySongs songs={this.state.filteredSongs} albulms={this.state.filteredAlbums} />
+                <ArtistSearchBar searchField="Artist" onChange={this.onArtistChange} />
+                <GenreSearchBar searchField="Genre" onChange={this.onReChange} />
+                <ReleaseDate searchField="Release Date" onChange={this.onReleaseChange} />
+                <DisplaySongs songs={this.state.filteredSongs} albums={this.state.filteredAlbums} />
                 
             </div>
             
