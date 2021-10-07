@@ -10,7 +10,7 @@ import AlbumSearchBar from "./albumSearchBar";
 import ArtistSearchBar from "./artistSearchBar";
 import GenreSearchBar from "./genreSearchBar";
 import ReleaseDate from "./releaseDate";
-
+import styles from './styles.css';
 
 
 class App extends React.Component{

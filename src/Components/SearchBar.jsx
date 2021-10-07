@@ -29,9 +29,11 @@ render() {
         <a class="active" href="https://google.com">Home</a>
         <a href="https://google.com">About</a>
         <a href="https://google.com">Contact</a>
+        <center>
         <input type="text" placeholder='search'  onChange={this.onInputchange}> 
         </input>
-        <button id='btn'>clickme</button>
+        <button id='btn'>Submit</button>
+        </center>
         </div>
     )
  }
